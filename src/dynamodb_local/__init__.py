@@ -130,11 +130,15 @@ def start_dynamodb_local(
         raise DynamoDBLocalException from e
 
     if (returncode := proc.poll()) is not None:
-        DynamoDBLocalException(
+        raise DynamoDBLocalException(
             f"DynamoDB process has terminated unexpectedly, return code: {returncode}"
         )
 
-    return DynamoDBLocalServer(proc, endpoint=f"http://{host}:{port}")
+    endpoint = f"http://{host}:{port}"
+
+    logger.debug(f"DynamoDB local started at {endpoint}")
+
+    return DynamoDBLocalServer(proc, endpoint=endpoint)
 
 
 class DynamoDBLocalServer:
