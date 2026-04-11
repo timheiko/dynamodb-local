@@ -13,7 +13,7 @@ Getting Started
 
 2. Usage
 
-Non-async
+Non-async DynamoDB local download:
 
 .. code-block:: python
 
@@ -21,13 +21,29 @@ Non-async
     ...
     dynamodb_local_jar_path = download_dynamodb()
 
-Async
+Async DynamoDB local download:
 
 .. code-block:: python
 
    from dynamodb_local import download_dynamodb_async
    ...
    dynamodb_local_jar_path = await download_dynamodb_async()
+
+Starting DynamoDB local endpoint:
+
+.. code-block:: python
+
+   from dynamodb_local import download_dynamodb_async
+   ...
+   dynamodb_local_dir = ...
+   
+   dynamodb_local_jar_path = await download_dynamodb_async(dynamodb_local_dir)
+
+   with start_dynamodb_local(parent_dir=dynamodb_local_dir, port=8000) as dynamodb:
+        endpoint = dynamodb.endpoint
+
+        # the endpoint is ready to be sent requests to, e.g. through boto3 SDK
+
 
 Features
 --------
@@ -37,8 +53,8 @@ Features
 
 Notes
 -----
-* This library does not start the `DynamoDB local <https://d1ni2b6xgvw0s0.cloudfront.net/v2.x/dynamodb_local_latest.tar.gz>`_ it downloaded and unpacked.
-* Starting the actual DynamoDB local process requires a JRE or JDK. 
+* The library downloads and unpacks `DynamoDB local <https://d1ni2b6xgvw0s0.cloudfront.net/v2.x/dynamodb_local_latest.tar.gz>`_.
+* The library can start a DynamoDB local instance; however, it requires a JRE or JDK for that.
 
 Credits
 -------
