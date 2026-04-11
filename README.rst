@@ -37,9 +37,8 @@ Features
 
 Notes
 -----
-* This library does not Starting the `DynamoDB local <https://d1ni2b6xgvw0s0.cloudfront.net/v2.x/dynamodb_local_latest.tar.gz>`_ it downloaded and unpacked.
-* Starting the actual DynamoDB lolal process requieres a JRE or JDK.
-
+* This library does not start the `DynamoDB local <https://d1ni2b6xgvw0s0.cloudfront.net/v2.x/dynamodb_local_latest.tar.gz>`_ it downloaded and unpacked.
+* Starting the actual DynamoDB local process requires a JRE or JDK. 
 
 Credits
 -------
