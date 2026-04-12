@@ -60,7 +60,7 @@ async def test_download_dynamodb_async_cached(tmp_directory: Path):
     assert t1 - t0 < 1.0
 
 
-def test_start_dynamodb_local(tmp_directory: Path):
+def test_start_dynamodb_local_context_manager(tmp_directory: Path):
     with start_dynamodb_local(parent_dir=tmp_directory, port=8000) as dynamodb:
         endpoint = dynamodb.endpoint
 
@@ -78,3 +78,25 @@ def test_start_dynamodb_local(tmp_directory: Path):
 
         with request.urlopen(req) as response:
             assert response.read().decode() == '{"TableNames":[]}'
+
+
+def test_start_dynamodb_local_no_context_manager(tmp_directory: Path):
+    dynamodb_local = start_dynamodb_local(parent_dir=tmp_directory, port=8000)
+    endpoint = dynamodb_local.endpoint
+
+    req = request.Request(endpoint, data=b"{}")
+    req.add_header("Accept-Encoding", "identity")
+    req.add_header(
+        "Authorization",
+        "AWS4-HMAC-SHA256 Credential=AKIAXXXXXXXXXXXXXXXX/20190505/ap-southeast-2/dynamodb/aws4_request, SignedHeaders=accept-encoding;cache-control;content-length;content-type;host;postman-token;user-agent;x-amz-date;x-amz-target, Signature=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+    )
+    req.add_header("Content-Type", "application/json")
+    # https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_ListTables.html
+    req.add_header("X-Amz-Target", "DynamoDB_20120810.ListTables")
+    req.add_header("X-Amz-Date", "20190505T235951Z")
+    req.add_header("cache-control", "no-cache")
+
+    with request.urlopen(req) as response:
+        assert response.read().decode() == '{"TableNames":[]}'
+
+    dynamodb_local.shutdown()

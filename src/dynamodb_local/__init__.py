@@ -13,7 +13,7 @@ import socket
 
 from logging import getLogger
 
-__version__ = "1.1.1"
+__version__ = "1.1.2"
 
 # https://pypi.org/project/pytest-dynamodb/
 DYNAMODB_LOCAL_DIR = Path("tmp/dynamodb")
@@ -152,6 +152,9 @@ class DynamoDBLocalServer:
         return self
 
     def __exit__(self, exc_type, exc_value, traceback):
+        self.shutdown()
+
+    def shutdown(self):
         self.proc.terminate()
 
 
