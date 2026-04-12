@@ -13,3 +13,7 @@ dynamic = [
 
 [tool.setuptools.dynamic]
 version = {attr = "dynamodb_local.__version__"}
+
+[project.urls]
+"Source" = "https://github.com/timheiko/dynamodb-local"
+"Bug Tracker" = "https://github.com/timheiko/dynamodb-local/issues"

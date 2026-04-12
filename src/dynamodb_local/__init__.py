@@ -13,7 +13,7 @@ import socket
 
 from logging import getLogger
 
-__version__ = "1.1.2"
+__version__ = "1.1.3"
 
 # https://pypi.org/project/pytest-dynamodb/
 DYNAMODB_LOCAL_DIR = Path("tmp/dynamodb")
