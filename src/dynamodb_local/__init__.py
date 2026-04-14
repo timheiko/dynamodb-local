@@ -1,17 +1,16 @@
 #!/usr/bin/env python3
 
 import asyncio
-from urllib import request
 import shutil
-from pathlib import Path
-from os import makedirs, path, PathLike
-from hashlib import sha256
-import time
+import socket
 import subprocess
 import sys
-import socket
-
+import time
+from hashlib import sha256
 from logging import getLogger
+from os import PathLike, makedirs, path
+from pathlib import Path
+from urllib import request
 
 __version__ = "1.1.3"
 

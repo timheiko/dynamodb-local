@@ -1,14 +1,16 @@
+import time
+from pathlib import Path
+from tempfile import TemporaryDirectory, mkdtemp
+from time import perf_counter
+from urllib import request
+
 import pytest
+
 from dynamodb_local import (
     download_dynamodb,
     download_dynamodb_async,
     start_dynamodb_local,
 )
-from tempfile import TemporaryDirectory, mkdtemp
-from pathlib import Path
-from time import perf_counter
-from urllib import request
-import time
 
 
 @pytest.fixture

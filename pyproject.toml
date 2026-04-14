@@ -1,3 +1,8 @@
+[build-system]
+requires = [
+  "setuptools >= 75.3.0"
+]
+
 [project]
 description = "DynamoDB local downloader"
 name = "dynamodb-local"
@@ -10,6 +15,17 @@ readme = "README.rst"
 dynamic = [
   "version",
 ]
+dependencies = [
+  "build",
+]
+
+[project.optional-dependencies]
+dev = [
+  "black >= 26.3.1",
+  "isort >= 8.0.1",
+  "pytest >= 9.0.3",
+  "pytest-asyncio >= 1.3.0",
+]
 
 [tool.setuptools.dynamic]
 version = {attr = "dynamodb_local.__version__"}
@@ -17,3 +33,6 @@ version = {attr = "dynamodb_local.__version__"}
 [project.urls]
 "Source" = "https://github.com/timheiko/dynamodb-local"
 "Bug Tracker" = "https://github.com/timheiko/dynamodb-local/issues"
+
+[tool.isort]
+profile = "black"
