@@ -4,7 +4,6 @@ import asyncio
 import shutil
 import socket
 import subprocess
-import sys
 import time
 from hashlib import sha256
 from logging import getLogger
@@ -116,17 +115,19 @@ def start_dynamodb_local(
 
     host = "localhost"
 
+    last_exception = None
     for _ in range(10):
         try:
             sock = socket.socket()
             sock.connect((host, port))
             break
         except (socket.error, socket.timeout) as e:
+            last_exception = e
             time.sleep(0.5)
         finally:
             sock.close()
     else:
-        raise DynamoDBLocalException from e
+        raise DynamoDBLocalException from last_exception
 
     if (returncode := proc.poll()) is not None:
         raise DynamoDBLocalException(
@@ -157,7 +158,8 @@ class DynamoDBLocalServer:
         self.proc.terminate()
 
 
-class DynamoDBLocalException(Exception): ...
+class DynamoDBLocalException(Exception):
+    pass
 
 
 if __name__ == "__main__":
