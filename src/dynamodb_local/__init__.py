@@ -164,3 +164,12 @@ class DynamoDBLocalException(Exception):
 
 if __name__ == "__main__":
     download_dynamodb()
+
+
+__all__ = [
+    "DynamoDBLocalException",
+    "DynamoDBLocalServer",
+    "start_dynamodb_local",
+    "download_dynamodb",
+    "download_dynamodb_async",
+]
