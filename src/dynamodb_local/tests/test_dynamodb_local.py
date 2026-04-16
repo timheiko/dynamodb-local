@@ -69,11 +69,7 @@ def test_start_dynamodb_local_context_manager(tmp_directory: Path):
         req.add_header("Accept-Encoding", "identity")
         req.add_header(
             "Authorization",
-            (
-                "AWS4-HMAC-SHA256 Credential=AKIAXXXXXXXXXXXXXXXX/20190505/ap-southeast-2/dynamodb/aws4_request, "
-                "SignedHeaders=accept-encoding;cache-control;content-length;content-type;x-amz-date;x-amz-target, "
-                "Signature=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-            ),
+            "AWS4-HMAC-SHA256 Credential=AKIAXXXXXXXXXXXXXXXX/20190505/ap-southeast-2/dynamodb/aws4_request, SignedHeaders=accept-encoding;cache-control;content-length;content-type;host;postman-token;user-agent;x-amz-date;x-amz-target, Signature=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
         )
         req.add_header("Content-Type", "application/json")
         # https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_ListTables.html
@@ -93,11 +89,7 @@ def test_start_dynamodb_local_no_context_manager(tmp_directory: Path):
     req.add_header("Accept-Encoding", "identity")
     req.add_header(
         "Authorization",
-        (
-            "AWS4-HMAC-SHA256 Credential=AKIAXXXXXXXXXXXXXXXX/20190505/ap-southeast-2/dynamodb/aws4_request, "
-            "SignedHeaders=accept-encoding;cache-control;content-length;content-type;x-amz-date;x-amz-target, "
-            "Signature=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-        ),
+        "AWS4-HMAC-SHA256 Credential=AKIAXXXXXXXXXXXXXXXX/20190505/ap-southeast-2/dynamodb/aws4_request, SignedHeaders=accept-encoding;cache-control;content-length;content-type;host;postman-token;user-agent;x-amz-date;x-amz-target, Signature=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
     )
     req.add_header("Content-Type", "application/json")
     # https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_ListTables.html
