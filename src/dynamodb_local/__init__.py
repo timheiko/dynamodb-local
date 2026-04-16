@@ -11,7 +11,7 @@ from os import PathLike, makedirs, path
 from pathlib import Path
 from urllib import request
 
-__version__ = "1.1.4"
+__version__ = "1.1.5"
 
 # https://pypi.org/project/pytest-dynamodb/
 DYNAMODB_LOCAL_DIR = Path("tmp/dynamodb")
